@@ -35,6 +35,7 @@ import android.widget.TextView;
 import de.j4velin.pedometer.BuildConfig;
 import de.j4velin.pedometer.R;
 import de.j4velin.pedometer.SensorListener;
+import de.j4velin.pedometer.weather.MainActivity;
 
 public class Activity_Main extends FragmentActivity {
 
@@ -84,18 +85,10 @@ public class Activity_Main extends FragmentActivity {
                 break;
             case R.id.action_leaderboard:
             case R.id.action_achievements:
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setTitle("Google services required");
-                builder2.setMessage(
-                        "This feature is not available on the F-Droid version of the app");
-                builder2.setNegativeButton(android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder2.create().show();
+
+
+                startActivity(new Intent(this, MainActivity.class));
+
                 break;
             case R.id.action_faq:
                 startActivity(new Intent(Intent.ACTION_VIEW,
