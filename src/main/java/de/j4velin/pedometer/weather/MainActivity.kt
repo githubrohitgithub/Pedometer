@@ -1,7 +1,7 @@
 package de.j4velin.pedometer.weather
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Html
 import android.widget.TextView
 import android.widget.Toast
@@ -15,13 +15,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
-    private var weatherData: TextView? = null
+    private var highTemp: TextView? = null
+    private var lowTemp: TextView? = null
+    private var midTemp: TextView? = null
+    private var humidity: TextView? = null
+    private var presure: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        weatherData = findViewById(R.id.textView)
+        highTemp = findViewById(R.id.tv_tempMax)
+        lowTemp = findViewById(R.id.tv_tempMin)
+        midTemp = findViewById(R.id.tv_tempMid)
+        humidity = findViewById(R.id.tv_humidity)
+        presure = findViewById(R.id.tv_presure)
 
         getCurrentData();
     }
@@ -41,30 +49,42 @@ class MainActivity : AppCompatActivity() {
                     val weatherResponse = response.body()!!
 
 
-                    val stringBuilder = Html.fromHtml("<b>País:</b> " +
-                            weatherResponse.sys!!.country +
-                            "<br>" +
-                            "<b>Temperatura:</b> " +
-                            (weatherResponse.main!!.temp - 273).toString().substring(0,3) + " ºC" +
-                            "<br>" +
-                            "<b>Temperatura(Min):</b> " +
-                            (weatherResponse.main!!.temp_min - 273).toString().substring(0,3) + " ºC" +
-                            "<br>" +
-                            "<b>Temperatura(Max):</b> " +
-                            (weatherResponse.main!!.temp_max - 273).toString().substring(0,3) + " ºC" +
-                            "<br>" +
-                            "<b>Humedad:</b> " +
-                            weatherResponse.main!!.humidity +
-                            "<br>" +
-                            "<b>Presión:</b> " +
-                            weatherResponse.main!!.pressure)
 
-                    weatherData!!.text = stringBuilder
+
+
+                    lowTemp?.text = (weatherResponse.main!!.temp_min - 273).toString().substring(0,3) + " ºC"+ " Low"
+                    highTemp?.text = (weatherResponse.main!!.temp_max - 273).toString().substring(0,3) + " ºC"+ " High"
+                    midTemp?.text = (weatherResponse.main!!.temp - 273).toString().substring(0,3) + " ºC"+ " Normal"
+                    humidity?.text = weatherResponse.main.humidity.toString()+ " Humidity"
+                    presure?.text = weatherResponse.main.pressure.toString()+ " Presure"
+
+
+
+//                    val stringBuilder = Html.fromHtml("<b>País:</b> " +
+//                            weatherResponse.sys!!.country +
+//                            "<br>" +
+//                            "<b>Temperatura:</b> " +
+//                            (weatherResponse.main!!.temp - 273).toString().substring(0,3) + " ºC" +
+//                            "<br>" +
+//                            "<b>Temperatura(Min):</b> " +
+//                            (weatherResponse.main!!.temp_min - 273).toString().substring(0,3) + " ºC" +
+//                            "<br>" +
+//                            "<b>Temperatura(Max):</b> " +
+//                            (weatherResponse.main!!.temp_max - 273).toString().substring(0,3) + " ºC" +
+//                            "<br>" +
+//                            "<b>Humedad:</b> " +
+//                            weatherResponse.main!!.humidity +
+//                            "<br>" +
+//                            "<b>Presión:</b> " +
+//                            weatherResponse.main!!.pressure)
+
+
                 }
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                weatherData!!.text = t.message
+
+                Toast.makeText(this@MainActivity,t.message,Toast.LENGTH_SHORT).show()
             }
         })
     }

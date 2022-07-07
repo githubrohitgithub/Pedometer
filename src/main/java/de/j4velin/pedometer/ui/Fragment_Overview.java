@@ -38,6 +38,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.BarModel;
@@ -203,14 +207,12 @@ public class Fragment_Overview extends Fragment implements SensorEventListener {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_split_count:
-                Dialog_Split.getDialog(getActivity(),
-                        total_start + Math.max(todayOffset + since_boot, 0)).show();
-                return true;
-            default:
-                return ((Activity_Main) getActivity()).optionsItemSelected(item);
+        if (item.getItemId() == R.id.action_split_count) {
+            Dialog_Split.getDialog(getActivity(),
+                    total_start + Math.max(todayOffset + since_boot, 0)).show();
+            return true;
         }
+        return ((Activity_Main) getActivity()).optionsItemSelected(item);
     }
 
     @Override
@@ -345,8 +347,6 @@ public class Fragment_Overview extends Fragment implements SensorEventListener {
             barChart.setVisibility(View.GONE);
         }
     }
-
-
 
 
 }
