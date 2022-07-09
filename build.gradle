@@ -36,7 +36,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "de.j4velin.pedometer"
+        applicationId "de.rohit.pedometer"
         minSdkVersion 23
     }
 
