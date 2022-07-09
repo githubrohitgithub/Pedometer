@@ -26,11 +26,12 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
-import androidx.core.content.PermissionChecker;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import androidx.core.content.PermissionChecker;
+import androidx.fragment.app.FragmentActivity;
 
 import de.rohit.pedometer.BuildConfig;
 import de.rohit.pedometer.R;
