@@ -23,7 +23,6 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -91,9 +90,7 @@ public class Activity_Main extends FragmentActivity {
 
                 break;
             case R.id.action_faq:
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://j4velin.de/faq/index.php?app=pm"))
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
                 break;
             case R.id.action_about:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
